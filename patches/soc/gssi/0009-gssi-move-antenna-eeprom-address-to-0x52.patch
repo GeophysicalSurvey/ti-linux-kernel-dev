@@ -1,0 +1,28 @@
+From c68e20d7ff07310982038ee8bd9f446e190658d7 Mon Sep 17 00:00:00 2001
+From: Jeremy Stashluk <stashlukj@geophysical.com>
+Date: Tue, 27 Nov 2018 09:09:37 -0500
+Subject: [PATCH] gssi: move antenna eeprom address to 0x52
+
+---
+ arch/arm/boot/dts/gssi-27-009-serial.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/gssi-27-009-serial.dtsi b/arch/arm/boot/dts/gssi-27-009-serial.dtsi
+index 7c4fd19..f8e3bef 100644
+--- a/arch/arm/boot/dts/gssi-27-009-serial.dtsi
++++ b/arch/arm/boot/dts/gssi-27-009-serial.dtsi
+@@ -59,9 +59,9 @@
+ 		sbs,i2c-retry-count = <100>;
+ 	};
+ 
+-	eeprom_ant: eeprom-ant@50 {
++	eeprom_ant: eeprom-ant@52 {
+ 		compatible = "atmel,24c32";
+-		reg = <0x50>;
++		reg = <0x52>;
+ 	};
+ };
+ 
+-- 
+2.7.4
+
