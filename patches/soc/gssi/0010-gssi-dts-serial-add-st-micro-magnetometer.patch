@@ -1,0 +1,48 @@
+From b680552b8bb278d0aeca699b6fb3a1d44db853d4 Mon Sep 17 00:00:00 2001
+From: Jeremy Stashluk <stashlukj@geophysical.com>
+Date: Mon, 28 Jan 2019 17:18:23 -0500
+Subject: [PATCH] gssi: dts: serial add st micro magnetometer
+
+---
+ arch/arm/boot/dts/gssi-27-009-serial.dtsi | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/arch/arm/boot/dts/gssi-27-009-serial.dtsi b/arch/arm/boot/dts/gssi-27-009-serial.dtsi
+index f8e3bef..af89ab2 100644
+--- a/arch/arm/boot/dts/gssi-27-009-serial.dtsi
++++ b/arch/arm/boot/dts/gssi-27-009-serial.dtsi
+@@ -6,6 +6,13 @@
+ 		>;
+ 	};
+ 
++	lsm303c_pins: pinmux_lsm303c_pins {
++		pinctrl-single,pins = <
++			DRA7XX_CORE_IOPAD(0x36b4, PIN_INPUT_PULLUP    | MUX_MODE10) /* G12 mcasp1_axr0 i2c5_sda */
++			DRA7XX_CORE_IOPAD(0x36b8, PIN_INPUT_PULLUP    | MUX_MODE10) /* F12 mcasp1_axr1 i2c5_scl */
++		>;
++	};
++
+     eqep1_pins: pinmux_eqep1_pins {
+         pinctrl-single,pins = <
+             DRA7XX_CORE_IOPAD(0x350c, PIN_INPUT           | MUX_MODE10) /* AG6 vin1a_d6 eQEP2A_in */
+@@ -65,6 +72,17 @@
+ 	};
+ };
+ 
++&i2c5 {
++    pinctrl-names = "default";
++    pinctrl-0 = <&lsm303c_pins>;
++    status = "okay";
++
++    magn: mag@1e {
++	    compatible = "st,lis3mdl";
++        reg = <0x1e>;
++    };
++};
++
+ &uart8 {
+     status = "okay";
+     pinctrl-names = "default";
+-- 
+2.7.4
+
