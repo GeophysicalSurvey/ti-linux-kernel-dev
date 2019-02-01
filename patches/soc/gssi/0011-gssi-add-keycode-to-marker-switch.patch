@@ -1,0 +1,25 @@
+From 888af245836649506eaeb7d8eb3d0e7159bb545f Mon Sep 17 00:00:00 2001
+From: Jeremy Stashluk <stashlukj@geophysical.com>
+Date: Fri, 1 Feb 2019 09:52:36 -0500
+Subject: [PATCH] gssi: add keycode to marker switch
+
+---
+ arch/arm/boot/dts/gssi-27-009-gpio.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/boot/dts/gssi-27-009-gpio.dtsi b/arch/arm/boot/dts/gssi-27-009-gpio.dtsi
+index 072dc75..631c82f 100644
+--- a/arch/arm/boot/dts/gssi-27-009-gpio.dtsi
++++ b/arch/arm/boot/dts/gssi-27-009-gpio.dtsi
+@@ -4,6 +4,8 @@
+ 
+ 		marker {
+ 			label = "GSSI Marker Switch";
++            linux,code = <0x277>;
++
+ 		    pinctrl-names = "default";
+ 		    pinctrl-0 = <&power_switch_pins>;
+ 			gpios = <&gpio2 31 GPIO_ACTIVE_HIGH>;
+-- 
+2.7.4
+
