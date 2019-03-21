@@ -58,7 +58,7 @@ index 000000000000..072dc755ac8a
 +
 +        power_led0 {
 +            label = "gssi:led2_7";
-+		    gpios = <&gpio2 7 GPIO_ACTIVE_HIGH>;
++		    gpios = <&gpio2 7 GPIO_ACTIVE_LOW>;
 +			linux,default-trigger = "default-on";
 +		    default-state = "on";
 +        };
