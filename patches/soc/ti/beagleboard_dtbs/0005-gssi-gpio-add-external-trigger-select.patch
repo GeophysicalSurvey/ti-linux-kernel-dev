@@ -1,0 +1,38 @@
+From 41e8f9d033fbb9402c943828acb7e197a27b902b Mon Sep 17 00:00:00 2001
+From: Jeremy Stashluk <stashlukj@geophysical.com>
+Date: Thu, 27 Jun 2019 11:44:35 -0400
+Subject: [PATCH] gssi: gpio add external trigger select
+
+---
+ arch/arm/boot/dts/gssi-27-009-gpio.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/boot/dts/gssi-27-009-gpio.dtsi b/arch/arm/boot/dts/gssi-27-009-gpio.dtsi
+index 072dc75..0093a94 100644
+--- a/arch/arm/boot/dts/gssi-27-009-gpio.dtsi
++++ b/arch/arm/boot/dts/gssi-27-009-gpio.dtsi
+@@ -34,6 +34,13 @@
+ 			linux,default-trigger = "default-on";
+ 		    default-state = "on";
+         };
++
++        ext_trig_sel {
++            label = "gssi:out2_19";
++		    gpios = <&gpio2 19 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "default-off";
++		    default-state = "off";
++        };
+     };
+ };
+ 
+@@ -42,6 +49,7 @@
+         pinctrl-single,pins = <
+             DRA7XX_CORE_IOPAD(0x3464, PIN_INPUT_PULLDOWN  | MUX_MODE14) /* R04 gpmc_a9     gpio1_31 power sw */
+             DRA7XX_CORE_IOPAD(0x3484, PIN_OUTPUT_PULLUP   | MUX_MODE14) /* P03 gpmc_a17    gpio2_7  power LED */
++            DRA7XX_CORE_IOPAD(0x34B4, PIN_OUTPUT_PULLDOWN | MUX_MODE14) /* T01 gpmc_cs0    gpio2_19 bi-static */
+             DRA7XX_CORE_IOPAD(0x34B8, PIN_INPUT_PULLDOWN  | MUX_MODE14) /* P02 gpmc_cs2    gpio2_20 sir4K */
+             DRA7XX_CORE_IOPAD(0x34E0, PIN_INPUT_PULLDOWN  | MUX_MODE14) /* AH7 vin1b_clik1 gpio2_32 marker*/
+         >;
+-- 
+2.7.4
+
