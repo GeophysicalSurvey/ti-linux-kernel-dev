@@ -192,28 +192,6 @@ index e57a1c304779..8556e93fff00 100644
  };
  
  static struct kset *ov_kset;
-@@ -591,6 +677,12 @@ int of_overlay_create(struct device_node *tree)
- 	if (err)
- 		goto err_revert_overlay;
- 
-+	err = sysfs_create_groups(&ov->kobj, ov->attr_groups);
-+	if (err != 0) {
-+		pr_err("%s: sysfs_create_groups() failed for tree@%s\n",
-+				__func__, tree->full_name);
-+		goto err_remove_kobj;
-+	}
- 
- 	ov->kobj.kset = ov_kset;
- 	err = kobject_add(&ov->kobj, NULL, "%d", id);
-@@ -609,6 +701,8 @@ int of_overlay_create(struct device_node *tree)
- 
- 	return id;
- 
-+err_remove_kobj:
-+	kobject_put(&ov->kobj);
- err_cancel_overlay:
- 	of_changeset_revert(&ov->cset);
- err_revert_overlay:
 @@ -724,6 +818,7 @@ int of_overlay_destroy(int id)
  
  	of_overlay_notify(ov, OF_OVERLAY_PRE_REMOVE);
